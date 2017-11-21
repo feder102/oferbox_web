@@ -1,22 +1,22 @@
 <?php
 namespace App\Test\TestCase\Model\Table;
 
-use App\Model\Table\CuotasTable;
+use App\Model\Table\CompaniasTable;
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
 
 /**
- * App\Model\Table\CuotasTable Test Case
+ * App\Model\Table\CompaniasTable Test Case
  */
-class CuotasTableTest extends TestCase
+class CompaniasTableTest extends TestCase
 {
 
     /**
      * Test subject
      *
-     * @var \App\Model\Table\CuotasTable
+     * @var \App\Model\Table\CompaniasTable
      */
-    public $Cuotas;
+    public $Companias;
 
     /**
      * Fixtures
@@ -24,7 +24,7 @@ class CuotasTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'app.cuotas'
+        'app.companias'
     ];
 
     /**
@@ -35,8 +35,8 @@ class CuotasTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::exists('Cuotas') ? [] : ['className' => CuotasTable::class];
-        $this->Cuotas = TableRegistry::get('Cuotas', $config);
+        $config = TableRegistry::exists('Companias') ? [] : ['className' => CompaniasTable::class];
+        $this->Companias = TableRegistry::get('Companias', $config);
     }
 
     /**
@@ -46,7 +46,7 @@ class CuotasTableTest extends TestCase
      */
     public function tearDown()
     {
-        unset($this->Cuotas);
+        unset($this->Companias);
 
         parent::tearDown();
     }
@@ -67,16 +67,6 @@ class CuotasTableTest extends TestCase
      * @return void
      */
     public function testValidationDefault()
-    {
-        $this->markTestIncomplete('Not implemented yet.');
-    }
-
-    /**
-     * Test buildRules method
-     *
-     * @return void
-     */
-    public function testBuildRules()
     {
         $this->markTestIncomplete('Not implemented yet.');
     }

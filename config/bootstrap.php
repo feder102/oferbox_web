@@ -220,3 +220,18 @@ Type::build('timestamp')
 if (Configure::read('debug')) {
     Plugin::load('DebugKit', ['bootstrap' => true]);
 }
+Inflector::rules('singular', [
+  '/(.*)res$/i' => '\1r',
+  '/(.*)nes$/i' => '\1n',
+  '/(.*)des$/i' => '\1d',
+  '/(.*)ses$/i' => '\1s',
+  '/(.*)les$/i' => '\1l'
+]);
+
+Inflector::rules('plural', [
+  '/(.*)r$/i' => '\1res',
+  '/(.*)n$/i' => '\1nes',
+  '/(.*)d$/i' => '\1des',
+  '/(.*)s$/i' => '\1ses',
+  '/(.*)l$/i' => '\1les'
+]);

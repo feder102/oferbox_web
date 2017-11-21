@@ -14,7 +14,7 @@ use Cake\ORM\TableRegistry;
 class CuotasController extends AppController
 {
     public $paginate = [
-         'limit' => 50,
+         'limit' => 10,
          'order' => [
             'Clientes.RAZON_SOCI' => 'asc'
          ]
@@ -72,13 +72,13 @@ class CuotasController extends AppController
       $query = $this->Cuotas->find()
                 ->select(['ID_CUOTA','c.COD_CLIENT','ESTADO_VTO','cl.RAZON_SOCI', 'c.COD_VENDED','Cuotas.N_COMP_CAN','Cuotas.FECHA_CAN','Cuotas.IMPORTE_VT'])
                 ->join([
-                        'table' => 'Comprobantes',
+                        'table' => 'comprobantes',
                         'alias' => 'c',
                         'type' => 'INNER',
                         'conditions' => 'c.N_COMP = Cuotas.N_COMP',
                 ])
                 ->contain(['Comprobantes','Comprobantes.Clientes'])
-                ->join(['table' => 'Clientes',
+                ->join(['table' => 'clientes',
                 'alias' => 'cl',
                 'type' => 'INNER',
                 'conditions' => 'cl.COD_CLIENT = c.COD_CLIENT',
@@ -101,7 +101,7 @@ class CuotasController extends AppController
         $sql_pen = $this->Cuotas->find()
                   ->select(['ID_CUOTA','ESTADO_VTO','c.COD_CLIENT','cl.RAZON_SOCI', 'c.COD_VENDED','Cuotas.N_COMP_CAN','Cuotas.FECHA_CAN','Cuotas.IMPORTE_VT'])
                   ->join([
-                          'table' => 'Comprobantes',
+                          'table' => 'comprobantes',
                           'alias' => 'c',
                           'type' => 'INNER',
                           'conditions' => 'c.N_COMP = Cuotas.N_COMP',
@@ -109,7 +109,7 @@ class CuotasController extends AppController
                   ->distinct ('ID_CUOTA')
                   ->where(['Cuotas.ESTADO_VTO'=> 'PEN'])
                   ->contain(['Comprobantes','Comprobantes.Clientes'])
-                  ->join(['table' => 'Clientes',
+                  ->join(['table' => 'clientes',
                   'alias' => 'cl',
                   'type' => 'INNER',
                   'conditions' => 'cl.COD_CLIENT = c.COD_CLIENT',
@@ -128,7 +128,7 @@ class CuotasController extends AppController
         $sql_pen = $this->Cuotas->find()
                   ->select(['ID_CUOTA','ESTADO_VTO','c.COD_CLIENT','cl.RAZON_SOCI', 'c.COD_VENDED','Cuotas.N_COMP_CAN','Cuotas.FECHA_CAN','Cuotas.IMPORTE_VT'])
                   ->join([
-                          'table' => 'Comprobantes',
+                          'table' => 'comprobantes',
                           'alias' => 'c',
                           'type' => 'LEFT',
                           'conditions' => 'c.N_COMP = Cuotas.N_COMP',
@@ -136,7 +136,7 @@ class CuotasController extends AppController
                   ->distinct ('ID_CUOTA')
                   ->where(['Cuotas.ESTADO_VTO'=> 'PEN','c.COD_VENDED'=> $cod_vended])
                   ->contain(['Comprobantes','Comprobantes.Clientes'])
-                  ->join(['table' => 'Clientes',
+                  ->join(['table' => 'clientes',
                   'alias' => 'cl',
                   'type' => 'INNER',
                   'conditions' => 'cl.COD_CLIENT = c.COD_CLIENT',
@@ -163,14 +163,14 @@ class CuotasController extends AppController
         $sql_cobrados = $this->Cuotas->find()
                   ->select(['c.COD_CLIENT','ESTADO_VTO','cl.RAZON_SOCI', 'c.COD_VENDED','Cuotas.N_COMP_CAN','Cuotas.FECHA_CAN','Cuotas.IMPORTE_VT'])
                   ->join([
-                          'table' => 'Comprobantes',
+                          'table' => 'comprobantes',
                           'alias' => 'c',
                           'type' => 'INNER',
                           'conditions' => 'c.N_COMP = Cuotas.N_COMP',
                   ])
                   ->where(['Cuotas.ESTADO_VTO'=> 'CAN'])
                   ->contain(['Comprobantes','Comprobantes.Clientes'])
-                  ->join(['table' => 'Clientes',
+                  ->join(['table' => 'clientes',
                   'alias' => 'cl',
                   'type' => 'INNER',
                   'conditions' => 'cl.COD_CLIENT = c.COD_CLIENT',
@@ -188,14 +188,14 @@ class CuotasController extends AppController
         $sql_cobrados = $this->Cuotas->find()
                   ->select(['c.COD_CLIENT','ESTADO_VTO','cl.RAZON_SOCI', 'c.COD_VENDED','Cuotas.N_COMP_CAN','Cuotas.FECHA_CAN','Cuotas.IMPORTE_VT'])
                   ->join([
-                          'table' => 'Comprobantes',
+                          'table' => 'comprobantes',
                           'alias' => 'c',
                           'type' => 'INNER',
                           'conditions' => 'c.N_COMP = Cuotas.N_COMP',
                   ])
                   ->where(['Cuotas.ESTADO_VTO'=> 'CAN','c.COD_VENDED'=> $cod_vended])
                   ->contain(['Comprobantes','Comprobantes.Clientes'])
-                  ->join(['table' => 'Clientes',
+                  ->join(['table' => 'clientes',
                   'alias' => 'cl',
                   'type' => 'INNER',
                   'conditions' => 'cl.COD_CLIENT = c.COD_CLIENT',
@@ -218,13 +218,13 @@ class CuotasController extends AppController
         $sql = $this->Cuotas->find()
                   ->select(['ID_CUOTA','c.COD_CLIENT','ESTADO_VTO','cl.RAZON_SOCI', 'c.COD_VENDED','Cuotas.N_COMP_CAN','Cuotas.FECHA_CAN','Cuotas.IMPORTE_VT'])
                   ->join([
-                          'table' => 'Comprobantes',
+                          'table' => 'comprobantes',
                           'alias' => 'c',
                           'type' => 'INNER',
                           'conditions' => 'c.N_COMP = Cuotas.N_COMP',
                   ])
                   ->contain(['Comprobantes','Comprobantes.Clientes'])
-                  ->join(['table' => 'Clientes',
+                  ->join(['table' => 'clientes',
                   'alias' => 'cl',
                   'type' => 'INNER',
                   'conditions' => 'cl.COD_CLIENT = c.COD_CLIENT',
@@ -242,14 +242,14 @@ class CuotasController extends AppController
         $sql = $this->Cuotas->find()
               ->select(['ID_CUOTA','c.COD_CLIENT','ESTADO_VTO','cl.RAZON_SOCI', 'c.COD_VENDED','Cuotas.N_COMP_CAN','Cuotas.FECHA_CAN','Cuotas.IMPORTE_VT'])
               ->join([
-                      'table' => 'Comprobantes',
+                      'table' => 'comprobantes',
                       'alias' => 'c',
                       'type' => 'INNER',
                       'conditions' => 'c.N_COMP = Cuotas.N_COMP',
               ])
               ->where(['c.COD_VENDED'=> $cod_vended])
               ->contain(['Comprobantes','Comprobantes.Clientes'])
-              ->join(['table' => 'Clientes',
+              ->join(['table' => 'clientes',
               'alias' => 'cl',
               'type' => 'INNER',
               'conditions' => 'cl.COD_CLIENT = c.COD_CLIENT',
