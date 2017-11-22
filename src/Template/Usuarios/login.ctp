@@ -24,6 +24,8 @@ body {
 <section id="login-container">
 
     <div class="row_fede">
+    <?= $this->Flash->render('auth') ?>
+    <?= $this->Form->create() ?>
         <div class="col-md-12" id="login-wrapper">
             <div class="panel panel-primary animated flipInY">
                 <div class="panel-heading">
@@ -36,20 +38,24 @@ body {
                     <form class="form-horizontal" role="form">
                         <div class="form-group">
                             <div class="col-md-12">
-                                <input type="email" class="form-control" id="email" placeholder="Usuario">
-                                <i class="fa fa-user"></i>
+                                <!-- <input type="email" class="form-control" id="email" placeholder="Usuario">
+                                <i class="fa fa-user"></i> -->
+                                <?= $this->Form->input('usuario') ?>
                             </div>
                         </div>
                         <div class="form-group">
                            <div class="col-md-12">
-                                <input type="password" class="form-control" id="password" placeholder="Contraseña">
-                                <i class="fa fa-lock"></i>
+                                <!-- <input type="password" class="form-control" id="password" placeholder="Contraseña">
+                                <i class="fa fa-lock"></i> -->
+                                <?= $this->Form->input('clave') ?>
                                 <!-- <a href="javascript:void(0)" class="help-block">Forgot Your Password?</a> -->
                             </div>
                         </div>
                         <div class="form-group">
                            <div class="col-md-12">
-                                <a href="index.html" class="btn btn-primary btn-block">Ingresar</a>
+                                <!-- <a href="index.html" class="btn btn-primary btn-block">Ingresar</a>-->
+                                <?= $this->Form->button(__('Login')); ?>
+                                <?= $this->Form->end() ?>
                                 <!-- <hr /> -->
                                 <!-- <a href="pages-sign-up.html" class="btn btn-default btn-block">Not a member? Sign Up</a> -->
                             </div>
@@ -59,5 +65,6 @@ body {
             </div>
         </div>
     </div>
+    
 
 </section>

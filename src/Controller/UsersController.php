@@ -2,7 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
-
+use Cake\Event\Event;
 /**
  * Users Controller
  *
@@ -34,12 +34,15 @@ class UsersController extends AppController
              ]
          ]);
      }
-
-     public function beforeFilter(Event $event)
-     {
-         $this->Auth->allow(['login' ,'view']);
-        //  , 'logout'
-     }
+     
+    public function beforeFilter(Event $event)
+    {
+        parent::beforeFilter($event);
+        // Allow users to register and logout.
+        // You should not add the "login" action to allow list. Doing so would
+        // cause problems with normal functioning of AuthComponent.
+        $this->Auth->allow(['add', 'logout','index']);
+    } 
     public function index()
     {
         $users = $this->paginate($this->Users);
@@ -54,12 +57,18 @@ class UsersController extends AppController
       $this->viewBuilder()->layout('onePage');
       if ($this->request->is('post')) {
           $user = $this->Auth->identify();
+          //pr($user);
           if ($user) {
               $this->Auth->setUser($user);
               return $this->redirect($this->Auth->redirectUrl());
+              //return $this->redirect(['action' => 'index']);
           }
           $this->Flash->error(__('Ingrese usuario y constraseña, nuevamente'));
       }
+    }
+    public function logout()
+    {
+        return $this->redirect($this->Auth->logout());
     }
 
     /**

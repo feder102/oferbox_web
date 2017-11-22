@@ -41,7 +41,24 @@ class UsuariosTable extends Table
      * @param \Cake\Validation\Validator $validator Validator instance.
      * @return \Cake\Validation\Validator
      */
+    protected function _setPassword($password)
+    {
+        if (strlen($password) > 0) {
+            return (new DefaultPasswordHasher)->hash($password);
+        }
+    }
     public function validationDefault(Validator $validator)
+    {
+        return $validator
+            ->notEmpty('USUARIO', 'El usuario es requerido')
+            ->notEmpty('CLAVE', 'La clave es requerida')
+            ->notEmpty('role', 'A role es requerido')
+            ->add('PERFIL', 'inList', [
+                'PERFIL' => ['inList', ['ADMINISTRADOR', 'COBRADOR']],
+                'message' => 'Ingrese un role valido'
+            ]);
+    }
+    /*public function validationDefault(Validator $validator)
     {
         $validator
             ->integer('ID_USUARIO')
@@ -61,7 +78,7 @@ class UsuariosTable extends Table
             ->allowEmpty('PERFIL');
 
         return $validator;
-    }
+    }*/
 
     /**
      * Returns a rules checker object that will be used for validating

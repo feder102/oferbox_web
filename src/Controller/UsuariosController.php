@@ -18,6 +18,15 @@ class UsuariosController extends AppController
      *
      * @return \Cake\Http\Response|void
      */
+
+    public function beforeFilter(Event $event)
+    {
+        parent::beforeFilter($event);
+        $this->Auth->allow('add','login','logout');
+    }
+       
+
+
     public function index()
     {
         $usuarios = $this->paginate($this->Usuarios);
@@ -37,15 +46,20 @@ class UsuariosController extends AppController
     {
 
       // $this->layout = 'onePage';
-      $this->viewBuilder()->layout('onePage');
-        // $usuario = $this->Usuarios->get($id, [
-        //     'contain' => []
-        // ]);
-        //
-        // $this->set('usuario', $usuario);
-        // $this->set('_serialize', ['usuario']);
+        $this->viewBuilder()->layout('onePage');
+        if ($this->request->is('post')) {
+             $user = $this->Auth->identify();
+            if ($user) {
+                $this->Auth->setUsuario($user);
+                return $this->redirect($this->Auth->redirectUrl());
+            }
+            $this->Flash->error(__('Invalido usuario o contraseña, intente de nuevo'));
+        }
     }
-
+    public function logout()
+    {
+        return $this->redirect($this->Auth->logout());
+    }
 
     /**
      * Add method
