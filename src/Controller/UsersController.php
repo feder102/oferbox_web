@@ -55,6 +55,7 @@ class UsersController extends AppController
 
       // $this->layout = 'onePage';
       $this->viewBuilder()->layout('onePage');
+      //pr($this->request->data);
       if ($this->request->is('post')) {
           $user = $this->Auth->identify();
           //pr($user);

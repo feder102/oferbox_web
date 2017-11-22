@@ -40,14 +40,14 @@ body {
                             <div class="col-md-12">
                                 <!-- <input type="email" class="form-control" id="email" placeholder="Usuario">
                                 <i class="fa fa-user"></i> -->
-                                <?= $this->Form->input('usuario') ?>
+                                <?= $this->Form->input('username') ?>
                             </div>
                         </div>
                         <div class="form-group">
                            <div class="col-md-12">
                                 <!-- <input type="password" class="form-control" id="password" placeholder="Contraseña">
                                 <i class="fa fa-lock"></i> -->
-                                <?= $this->Form->input('clave') ?>
+                                <?= $this->Form->input('password',array('style'=>'padding-left: 0.5rem;')) ?>
                                 <!-- <a href="javascript:void(0)" class="help-block">Forgot Your Password?</a> -->
                             </div>
                         </div>
